@@ -1,16 +1,24 @@
 <div class="container mt-5">
-  <h1>New Post</h1>
-
-  <%# Simple form for creating a new post %>
-  <%= simple_form_for @post, html: { class: 'form-horizontal' }, turbo: false do |f| %>
-    <div class="mb-3">
-      <%= f.input :title, input_html: { class: 'form-control' }, label_html: { class: 'form-label' } %>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card card-custom">
+        <div class="card-header">
+          <h1 class="text-center">New Post</h1>
+        </div>
+        <div class="card-body">
+          <%= simple_form_for @post, html: { class: 'form-horizontal' }, turbo: false do |f| %>
+            <div class="mb-3">
+              <%= f.input :title, input_html: { class: 'form-control' }, label_html: { class: 'form-label' }, placeholder: 'Enter title' %>
+            </div>
+            <div class="mb-3">
+              <%= f.input :body, as: :text, input_html: { class: 'form-control', rows: 5 }, label_html: { class: 'form-label' }, placeholder: 'Enter body' %>
+            </div>
+            <div class="mb-3">
+              <%= f.button :submit, 'Create Post', class: 'btn-comment' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <%= f.input :body, as: :text, input_html: { class: 'form-control', rows: 5 }, label_html: { class: 'form-label' } %>
-    </div>
-    <div class="mb-3">
-      <%= f.button :submit, 'Create Post', class: 'btn btn-primary' %>
-    </div>
-  <% end %>
+  </div>
 </div>
