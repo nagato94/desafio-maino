@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 
  def create
     @post = current_user.posts.build(post_params)
-    
+
     if @post.save
       redirect_to posts_path, notice: 'Post was successfully created.'
     else
@@ -38,8 +38,12 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
-    redirect_to posts_url, notice: 'Post was successfully destroyed.'
+    if @post.user == current_user
+      @post.destroy
+      redirect_to root_path, notice: 'Post was successfully deleted.'
+    else
+      redirect_to root_path, alert: 'You are not authorized to delete this post.'
+    end
   end
 
   private

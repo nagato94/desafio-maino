@@ -1,0 +1,27 @@
+/* Estilo para os botões customizados */
+.btn-custom {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+  border-radius: 2px; /* Bordas arredondadas */
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+.btn-custom:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+  color: #fff;
+}
+
+.btn-comment{
+  background-color: $success;
+  border-color: black;
+  color: #007bff ;
+  border-radius: 2px; /* Bordas arredondadas */
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2); /* Sombra */
+  &:hover {
+    background-color: darken($success, 10%);
+    border-color: darken($success, 10%);
+    color: #fff;
+  }
+}
