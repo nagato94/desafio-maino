@@ -1,0 +1,10 @@
+<h1>Edit Post</h1>
+
+<%= simple_form_for @post do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :title, label: "Title" %>
+  <%= f.input :body, label: "Content", as: :text %>
+  <%= f.button :submit, "Update Post" %>
+<% end %>
+
+<%= link_to 'Back to posts', posts_path %>
