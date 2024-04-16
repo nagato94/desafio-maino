@@ -4,14 +4,12 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @post.comments.build(comment_params)
-    @comment.user = current_user if user_signed_in?
     if @comment.save
-      redirect_to root_path, notice: 'Comment was successfully added.'
+      redirect_to root_path, notice: t('posts.comments.add_success')
     else
-      redirect_to post_path(@post), alert: 'Error adding comment. Please ensure your comment is not empty.'
+      redirect_to post_path(@post), alert: t('posts.comments.add_fail')
     end
   end
-
 
 
   private

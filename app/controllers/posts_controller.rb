@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
@@ -11,18 +12,16 @@ class PostsController < ApplicationController
     @comments = @post.comments.all
   end
 
-
   def new
     @post = current_user.posts.build
   end
 
- def create
+  def create
     @post = current_user.posts.build(post_params)
-
     if @post.save
-      redirect_to posts_path, notice: 'Post was successfully created.'
+      redirect_to posts_path, notice: t('posts.create.success')
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity, alert: t('posts.create.fail')
     end
   end
 
@@ -31,18 +30,18 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: 'Post was successfully updated.'
+      redirect_to @post, notice: t('posts.update.success')
     else
-      render :edit
+      render :edit, alert: t('posts.update.fail')
     end
   end
 
   def destroy
     if @post.user == current_user
       @post.destroy
-      redirect_to root_path, notice: 'Post was successfully deleted.'
+      redirect_to root_path, notice: t('posts.delete.success')
     else
-      redirect_to root_path, alert: 'You are not authorized to delete this post.'
+      redirect_to root_path, alert: t('posts.delete.unauthorized')
     end
   end
 
