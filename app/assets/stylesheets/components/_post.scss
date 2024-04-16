@@ -1,0 +1,22 @@
+// Estilos para o cartão do post
+.post-card {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+// Estilos para o título do post
+.post-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+// Estilos para o corpo do post
+.post-body {
+  color: #333;
+}
+
+// Estilos para a contagem de comentários do post
+.post-comments {
+  margin-top: 1rem;
+}

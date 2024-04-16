@@ -1,0 +1,40 @@
+// Estilos para o paginador
+a {
+  text-decoration: none;
+}
+.pagination{
+  display: flex;
+  list-style: none;
+  padding: 0;
+  .page-item {
+    margin: 0 5px;
+    text-decoration: none;
+    &.active .page-link {
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    &.disabled .page-link {
+      color: #6c757d;
+      pointer-events: none;
+      background-color: #fff;
+      border-color: #dee2e6;
+    }
+
+    .page-link {
+      padding: 0.375rem 0.75rem;
+      color: #007bff;
+      background-color: transparent;
+      border: 1px solid #007bff;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      text-decoration: none !important;
+
+      &:hover {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+    }
+  }
+}
