@@ -1,4 +1,5 @@
 <div class="container mt-4">
+
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card card-custom mb-3">
@@ -12,7 +13,7 @@
 
       <div class="card card-custom">
         <div class="card-header card-header-custom">
-          Add a Comment
+         <%= t("posts.add_comment")  %>
         </div>
         <div class="card-body">
           <%= simple_form_for([@post, @post.comments.build], html: { class: 'form-horizontal' }) do |form| %>
@@ -31,20 +32,20 @@
                          class: "form-control",
                        } %>
 
-            <%= form.button :submit, "Post Comment", class: "btn btn-comment mt-2" %>
+            <%= form.button :submit, t("posts.post_comment"), class: "btn btn-comment mt-2" %>
           <% end %>
         </div>
       </div>
 
       <div class="card card-custom mt-4">
         <div class="card-header card-header-custom">
-          <h2>Comments:</h2>
+            <h2><%= t("posts.comment") %></h2>
         </div>
         <div class="card-body">
           <% @post.comments.each do |comment| %>
             <% unless comment.body.blank? %>
               <div class="comment comment-custom">
-                <strong><%= comment.user ? comment.user.email : "Anonymous say" %>:</strong>
+                <strong><%= comment.user ? comment.user.email : t("posts.anonimo") %>:</strong>
                 <p><%= comment.body %></p>
               </div>
             <% end %>
@@ -62,13 +63,13 @@
       },
       class: "btn btn-danger text-white",
       method: :delete do %>
-      <i class="fas fa-trash-alt mr-2"></i> Delete Post
+      <i class="fas fa-trash-alt mr-2"></i> <%= t("posts.delete_post") %>
     <% end %>
   <% end %>
 
   <%= link_to root_path, class: 'btn btn-primary btn-custom mx-2' do %>
-    <i class="fas fa-arrow-left mr-2"></i> Back
-  <% end %>
+    <i class="fas fa-arrow-left mr-2"></i> <%= t("posts.btn_back")
+   %> <% end %>
 </div>
 
       </div>

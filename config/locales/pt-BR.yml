@@ -1,0 +1,25 @@
+pt-BR:
+  posts:
+    flags:
+      brazil: "🇧🇷"
+      usa: "🇺🇸"
+    create:
+      success: "Post criado com sucesso."
+      fail: "Falha ao criar o post."
+    update:
+      success: "Post atualizado com sucesso."
+      fail: "Falha ao atualizar o post."
+    delete:
+      success: "Post excluído com sucesso."
+      unauthorized: "Você não está autorizado a excluir este post."
+    comments:
+      add_success: "Comentário adicionado com sucesso."
+      add_fail: "Falha ao adicionar o comentário. Por favor, verifique se o seu comentário não está vazio."
+    new_post: "Novo Post"
+    btn_back: "Voltar"
+    btn_create: "Criar"
+    delete_post: "Excluir Post"
+    post_comment: "Comentar Post"
+    anonimo: "Anônimo disse"
+    comment: "Comentário"
+    add_comment: "Adicionar Comentário"
