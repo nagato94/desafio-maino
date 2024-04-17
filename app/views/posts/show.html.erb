@@ -10,6 +10,7 @@
           <p><%= @post.body %></p>
         </div>
       </div>
+      <%= link_to 'Download File', download_post_path(@post), class: 'btn btn-primary' %>
 
       <div class="card card-custom">
         <div class="card-header card-header-custom">
