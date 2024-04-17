@@ -1,21 +1,39 @@
 <div class="container mt-5">
-
-
-<%= link_to new_post_path, class: "btn btn-comment mb-3" do %>
-  <i class="fas fa-plus"></i> <%= t('posts.new_post') %>
-<% end %>
-
-  <%= paginate @posts %>
+  <%= paginate @posts, class: "pagination justify-content-center" %>
+  <%= form_with(url: posts_path, method: :get, local: true, class: "row g-3 align-items-center") do |form| %>
+    <div class="col-auto">
+      <%= form.label :tag, t("posts.filter_by_tag"), class: "col-form-label" %>
+    </div>
+    <div class="col-auto">
+      <%= form.select :tag, Tag.all.pluck(:name, :name), {include_blank: "All Tags"}, {class: "form-select", style: "width: auto;"} %>
+    </div>
+    <div class="col-auto">
+  <%= form.submit t("posts.filter"), class: "btn btn-primary" do %>  <i class="fa-solid fa-magnifying-glass"></i>
+  <% end %>
+</div>
+  <% end %>
 
   <% @posts.each do |post| %>
-    <div class="card post-card mb-3">
+    <div class="card mb-3">
       <div class="card-body">
-        <h2 class="post-title"><%= link_to post.title, post_path(post), class: "text-decoration-none" %></h2>
-        <p class="post-body"><%= post.body %></p>
-        <p class="post-comments"><small class="text-muted"><%= pluralize(post.comments.count, 'comment') %></small></p>
+        <h2 class="card-title"><%= link_to post.title, post_path(post), class: "text-decoration-none" %></h2>
+        <p class="card-text"><%= post.body %></p>
+        <% if post.tags.any? %>
+          <p>Tags:
+            <% post.tags.each do |tag| %>
+              <span class="badge bg-primary"><%= tag.name %></span>
+            <% end %>
+          </p>
+        <% else %>
+         <p><%=t("posts.no_tags") %></p>
+        <% end %>
       </div>
     </div>
   <% end %>
 
-  <%= paginate @posts %>
+  <%= link_to new_post_path, class: "btn btn-success mb-3" do %>
+    <i class="fas fa-plus"></i> <%= t('posts.new_post') %>
+  <% end %>
+
+
 </div>

@@ -4,7 +4,11 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @posts = Post.order(created_at: :desc).page(params[:page]).per(3)
+    if params[:tag].present?
+      @posts = Post.joins(:tags).where(tags: { name: params[:tag] }).distinct.order(created_at: :desc).page(params[:page]).per(3)
+    else
+      @posts = Post.order(created_at: :desc).page(params[:page]).per(3)
+    end
   end
 
   def show
@@ -17,22 +21,24 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(post_params)
-    if @post.save
-      redirect_to posts_path, notice: t('posts.create.success')
-    else
-      render :new, status: :unprocessable_entity, alert: t('posts.create.fail')
-    end
+  @post = current_user.posts.build(post_params)
+  if @post.save
+    process_tags(@post, params[:post][:new_tags])
+    redirect_to @post, notice: t('posts.create.success')
+  else
+    render :new, status: :unprocessable_entity
   end
+end
 
   def edit
   end
 
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: t('posts.update.success')
+      process_tags(@post, params[:post][:new_tags])
+      redirect_to @post, notice: 'Post was successfully updated.'
     else
-      render :edit, alert: t('posts.update.fail')
+      render :edit
     end
   end
 
@@ -46,11 +52,20 @@ class PostsController < ApplicationController
   end
 
   private
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    def post_params
-      params.require(:post).permit(:title, :body)
+  def process_tags(post, tag_string)
+    tag_names = tag_string.split(',').map(&:strip).uniq
+    tag_names.each do |name|
+      tag = Tag.find_or_create_by(name: name)
+      post.tags << tag unless post.tags.include?(tag)
     end
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :body, tag_ids: [], new_tags: [])
+  end
 end
