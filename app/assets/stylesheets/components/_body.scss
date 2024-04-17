@@ -1,0 +1,10 @@
+body {
+  /* Gradiente de fundo */
+  background: linear-gradient(to bottom, #cae8fa 0%, #a6c1ee 100%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,60 C150,180 150,0 300,120 C450,240 450,0 600,120 C750,240 750,0 900,120 C1050,240 1050,0 1200,60 L1200 00 L0 0 Z" fill="%23ffffff" opacity="0.5"></path></svg>');
+  /* Repetição e posicionamento das ondas */
+  background-repeat: repeat-x;
+  background-position: top;
+  min-height: 100vh;  /* Altura completa da janela de visualização */
+  background-size: cover, auto 100px;  /* Cobrir para o gradiente, largura automática e altura fixa para as ondas */
+}

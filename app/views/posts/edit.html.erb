@@ -1,10 +1,32 @@
-<h1>Edit Post</h1>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-body">
+    <h1 class="card-title text-center">    <%= t("posts.edit_post") %></h1>
+          <%= simple_form_for @post, html: { class: 'form-horizontal' } do |f| %>
+            <div class="form-group">
+              <%= f.error_notification %>
+            </div>
 
-<%= simple_form_for @post do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :title, label: "Title" %>
-  <%= f.input :body, label: "Content", as: :text %>
-  <%= f.button :submit, "Update Post" %>
-<% end %>
+            <div class="form-group">
+              <%= f.input :title, label: "Title", input_html: { class: 'form-control' } %>
+            </div>
 
-<%= link_to 'Back to posts', posts_path %>
+            <div class="form-group">
+              <%= f.input :body, label: "Content", as: :text, input_html: { class: 'form-control', rows: 10 } %>
+            </div>
+
+            <div class="form-group text-center">
+              <%= f.button :submit, "Update Post", class: 'btn btn-primary' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <%= link_to root_path, class: 'btn btn-primary btn-custom my-2' do %>
+    <i class="fas fa-arrow-left mr-2"></i> <%= t("posts.btn_back")
+   %> <% end %>
+    </div>
+  </div>
+</div>

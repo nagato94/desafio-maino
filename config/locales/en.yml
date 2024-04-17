@@ -26,3 +26,5 @@ en:
     filter_by_tag: "Filter by tag"
     body: "Body"
     title: "Title"
+    quantity_comments: "Number of Comments"
+    edit_post: "Edit Post"
