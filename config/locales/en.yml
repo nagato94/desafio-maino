@@ -21,3 +21,8 @@ en:
     anonimo: "Anonymous said"
     comment: "Comment"
     add_comment: "Add Comment"
+    filter: "Filter"
+    no_tags: "No tags"
+    filter_by_tag: "Filter by tag"
+    body: "Body"
+    title: "Title"

@@ -23,3 +23,8 @@ pt-BR:
     anonimo: "Anônimo disse"
     comment: "Comentário"
     add_comment: "Adicionar Comentário"
+    filter: "Filtrar"
+    no_tags: "Sem tags"
+    filter_by_tag: "Filtrar por tag"
+    body: "Conteúdo"
+    title: "Título"
