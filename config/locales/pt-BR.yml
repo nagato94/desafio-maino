@@ -1,4 +1,11 @@
 pt-BR:
+  devise:
+    sessions:
+      signed_in: 'Você entrou com sucesso.'
+      user:
+        signed_in: 'Usuário logado com sucesso.'
+      logout: 'Você saiu com sucesso.'
+      signed_out: 'Você saiu com sucesso.'
   posts:
     flags:
       brazil: "🇧🇷"
@@ -28,3 +35,5 @@ pt-BR:
     filter_by_tag: "Filtrar por tag"
     body: "Conteúdo"
     title: "Título"
+    quantity_comments: "Quantidade de Comentários"
+    edit_post: "Editar Post"

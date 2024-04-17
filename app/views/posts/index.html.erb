@@ -1,20 +1,25 @@
+
+
 <div class="container mt-5">
+  <div class="text-center">
+    <%= image_tag('maino.png', alt: 'Imagem de um beija-flor', class: 'bg-image') %>
+  </div>
   <%= paginate @posts, window: @posts.total_pages %>
   <%= form_with(url: posts_path, method: :get, local: true, class: "row g-3 align-items-center") do |form| %>
-    <div class="col-auto">
+    <div class="col-auto my-2">
       <%= form.label :tag, t("posts.filter_by_tag"), class: "col-form-label" %>
     </div>
-    <div class="col-auto">
+    <div class="col-auto my-2">
       <%= form.select :tag, Tag.all.pluck(:name, :name), {include_blank: "All Tags"}, {class: "form-select", style: "width: auto;"} %>
     </div>
-    <div class="col-auto">
+    <div class="col-auto my-2 ">
   <%= form.submit t("posts.filter"), class: "btn btn-primary" do %>  <i class="fa-solid fa-magnifying-glass"></i>
   <% end %>
 </div>
   <% end %>
 
   <% @posts.each do |post| %>
-    <div class="card mb-3">
+    <div class="card card-custom mb-3">
       <div class="card-body">
         <h2 class="card-title"><%= link_to post.title, post_path(post), class: "text-decoration-none" %></h2>
         <p class="card-text"><%= post.body %></p>
@@ -27,6 +32,9 @@
         <% else %>
          <p><%=t("posts.no_tags") %></p>
         <% end %>
+
+        <p><%= t("posts.quantity_comments") %>: <%= post.comments.count %></p>
+
       </div>
     </div>
   <% end %>

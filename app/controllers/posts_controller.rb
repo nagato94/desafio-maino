@@ -51,7 +51,7 @@ class PostsController < ApplicationController
       end
     else
       # Em caso de falha ao salvar, renderiza a view 'new' novamente
-      render :new, alert: 'Failed to save post.'
+      render :new, alert: 'Failed to save post.', status: :unprocessable_entity
     end
   end
 
@@ -82,12 +82,16 @@ class PostsController < ApplicationController
   private
 
   def process_tags(post, tag_string)
+    # Retorna cedo se tag_string for nil ou vazia, evitando erros quando chamando `split`
+    return if tag_string.blank?
+
     tag_names = tag_string.split(',').map(&:strip).uniq
     tag_names.each do |name|
       tag = Tag.find_or_create_by(name: name)
       post.tags << tag unless post.tags.include?(tag)
     end
   end
+
 
   def file_is_text?(file)
     file.content_type == 'text/plain'

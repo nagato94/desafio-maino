@@ -71,6 +71,11 @@
   <%= link_to root_path, class: 'btn btn-primary btn-custom mx-2' do %>
     <i class="fas fa-arrow-left mr-2"></i> <%= t("posts.btn_back")
    %> <% end %>
+
+   <%= link_to edit_post_path(@post), class: 'btn btn-info' do %>
+  <i class="fas fa-edit"></i> Edit
+<% end %>
+
 </div>
 
       </div>
