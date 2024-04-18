@@ -6,6 +6,13 @@ pt-BR:
         signed_in: 'Usuário logado com sucesso.'
       logout: 'Você saiu com sucesso.'
       signed_out: 'Você saiu com sucesso.'
+    failure:
+      unauthenticated: "Você precisa fazer login ou se registrar para continuar."
+      user:
+        unauthenticated: "Você precisa fazer login ou se registrar para continuar."
+      invalid: "Credenciais inválidas. Por favor, tente novamente."
+      user:
+        invalid: "Credenciais inválidas. Por favor, tente novamente."
   posts:
     flags:
       brazil: "🇧🇷"
