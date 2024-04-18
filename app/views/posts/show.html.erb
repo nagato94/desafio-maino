@@ -10,8 +10,6 @@
         </div>
       </div>
 
-      <%= link_to 'Download File', download_post_path(@post), class: 'btn btn-secondary mt-3' %>
-
       <!-- Comments Section -->
       <div class="card shadow mt-4">
         <div class="card-header card-bg-header text-white">
@@ -55,9 +53,12 @@
           <%= link_to edit_post_path(@post), class: 'btn btn-info text-black' do %>
             <i class="fas fa-edit"></i> Edit
           <% end %>
-          <%= link_to post_path(@post), method: :delete, data: { turbo_confirm: "Are you sure you want to delete this post?" }, class: "btn btn-danger text-white" do %>
-            <i class="fas fa-trash-alt"></i> Delete
-          <% end %>
+             <%= link_to post_path(@post), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn btn-danger text-white" do %>
+        <i class="fas fa-trash-alt"></i> Delete
+      <% end %>
+
+
+
         <% end %>
       </div>
     </div>
