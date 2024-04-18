@@ -1,5 +1,19 @@
 en:
   flag: "🇺🇸"
+  devise:
+    sessions:
+      signed_in: 'You have successfully signed in.'
+      user:
+        signed_in: 'User signed in successfully.'
+      logout: 'You have successfully signed out.'
+      signed_out: 'You have successfully signed out.'
+    failure:
+      unauthenticated: "Você precisa fazer login ou se registrar para continuar."
+      user:
+        unauthenticated: "Você precisa fazer login ou se registrar para continuar."
+      invalid: "Credenciais inválidas. Por favor, tente novamente."
+      user:
+        invalid: "Credenciais inválidas. Por favor, tente novamente."
   posts:
     create:
       success: "Post created successfully."

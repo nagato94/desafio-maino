@@ -1,0 +1,30 @@
+.footer {
+  background-image: linear-gradient(to right, #60adff, #a1c9f4);
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza horizontalmente o conteúdo */
+  height: 100px;
+  padding: 0px 50px;
+  color: rgba(0,0,0,0.3);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column; /* Organiza os elementos em coluna */
+  align-items: center; /* Alinha os itens ao centro horizontalmente */
+}
+
+.footer-links a {
+  color: black;
+  text-decoration: none;
+  font-size: 24px;
+  padding: 0px 10px;
+  &:hover {
+    //auentar o tamanho quando passar o mouse
+   transition: 0.5s ease-in-out;
+   color: #fff;
+}
+}
+.footer-links div:first-child {
+  margin-bottom: 10px; /* Espaçamento entre os ícones e o texto */
+}
