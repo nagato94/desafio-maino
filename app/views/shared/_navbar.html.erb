@@ -1,7 +1,7 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+      <%= image_tag "logo.png" %>
     <% end %>
 
     <button
@@ -20,13 +20,20 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
+            <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to t("flag.🇺🇸"), url_for(locale: :en), class: "nav-link" %>
+            <%= link_to url_for(locale: :en), class: "nav-link" do %>
+              <%= image_tag "us.png", alt: "English", style: "width: 20px;" %>
+            <% end %>
           </li>
-          <li><%= link_to t("flag.🇧🇷"), url_for(locale: :"pt-BR"), class: "nav-link" %>
+
+          <li class="nav-item">
+            <%= link_to url_for(locale: :"pt-BR"), class: "nav-link" do %>
+              <%= image_tag "br.png", alt: "Português", style: "width: 20px;" %>
+            <% end %>
           </li>
+
           <li class="nav-item dropdown">
             <a
               href="#"
@@ -36,9 +43,7 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier",
-              class: "avatar",
-              alt: "dropdown menu" %>
+              <%= image_tag "user.png", class: "avatar", alt: "dropdown menu" %>
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Action", "#", class: "dropdown-item" %>

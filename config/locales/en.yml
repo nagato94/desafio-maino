@@ -16,6 +16,7 @@ en:
     new_post: "New Post"
     btn_back: "Back"
     btn_create: "Create"
+    create_post: "Create Post"
     delete_post: "Delete Post"
     post_comment: "Post Comment"
     anonimo: "Anonymous said"

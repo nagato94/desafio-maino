@@ -13,8 +13,10 @@
       <%= form.select :tag, Tag.all.pluck(:name, :name), {include_blank: "All Tags"}, {class: "form-select", style: "width: auto;"} %>
     </div>
     <div class="col-auto my-2 ">
-  <%= form.submit t("posts.filter"), class: "btn btn-primary" do %>  <i class="fa-solid fa-magnifying-glass"></i>
-  <% end %>
+<%= form.button class: "btn btn-primary" do %>
+  <i class="fa-solid fa-magnifying-glass"></i> <%= t("posts.filter") %>
+<% end %>
+
 </div>
   <% end %>
 
@@ -38,7 +40,7 @@
       </div>
     </div>
   <% end %>
-  <%= link_to new_post_path, class: "btn btn-success mb-3" do %>
+  <%= link_to new_post_path, class: "btn btn-success mb-3 text-black btn-new" do %>
     <i class="fas fa-plus"></i> <%= t('posts.new_post') %>
   <% end %>
 

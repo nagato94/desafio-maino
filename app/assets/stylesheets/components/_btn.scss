@@ -7,6 +7,13 @@
   box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2); /* Sombra */
 }
 
+.btn{
+  border-color: #007bff;
+  color: #fff;
+  border-radius: 2px; /* Bordas arredondadas */
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
 .btn-custom:hover {
   background-color: #0056b3;
   border-color: #0056b3;
@@ -24,4 +31,9 @@
     border-color: darken($success, 10%);
     color: #fff;
   }
+}
+
+.btn-new:hover{
+  transition: 0.5s;
+  transform: scale(1.1);
 }

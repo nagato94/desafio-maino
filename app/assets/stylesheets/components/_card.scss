@@ -2,13 +2,14 @@
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 5px !important; /* Bordas arredondadas */
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Sombra */
+  &:hover {
+    transition: 0.5s ease-in-out;
+    transform: scale(1.1);
+  }
 }
 
-
-.card-header-custom {
-  background-color: #007bff;
+.card-bg-header{
+  background-image: linear-gradient(to right, #007bff, #a1c9f4);
   color: #fff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 5px !important; /* Bordas arredondadas */
-
+  border-radius: 5px 5px 0 0 !important; /* Bordas arredondadas */
 }

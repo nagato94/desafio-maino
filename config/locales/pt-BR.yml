@@ -26,6 +26,7 @@ pt-BR:
     btn_back: "Voltar"
     btn_create: "Criar"
     delete_post: "Excluir Post"
+    create_post: "Criar Post"
     post_comment: "Comentar Post"
     anonimo: "Anônimo disse"
     comment: "Comentário"

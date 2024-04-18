@@ -42,7 +42,7 @@
                       placeholder: "Example: tag1" %>
             </div>
             <div class="mb-3">
-              <%= f.button :submit, "Create Post", class: "btn-comment" %>
+              <%= f.button :submit, t("posts.create_post"), class: "btn-comment" %>
             </div>
             <%= f.file_field :file %>
             <%= form_with model: @post, local: true do |form| %>
