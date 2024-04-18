@@ -1,25 +1,26 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
 
-  def index
-    if params[:tag].present?
-      @posts = Post.joins(:tags).where(tags: { name: params[:tag] }).distinct.order(created_at: :desc).page(params[:page]).per(3)
-    else
-      @posts = Post.order(created_at: :desc).page(params[:page]).per(3)
-    end
+def index
+  if params[:tag].present?
+    @posts = Post.joins(:tags)
+                 .where(tags: { name: params[:tag] })
+                 .distinct
+                 .includes(:tags)  # Garantir que as tags sejam pré-carregadas
+                 .order(created_at: :desc)
+                 .page(params[:page]).per(3)
+  else
+    @posts = Post.includes(:tags)  # Pré-carregar tags mesmo sem filtro
+                 .order(created_at: :desc)
+                 .page(params[:page]).per(3)
   end
+end
+
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments.all
-  end
-
-  def download
-    @post = Post.find(params[:id])
     if @post.file.attached?
-      send_data @post.file.download, filename: @post.file.filename.to_s, disposition: 'attachment'
-    else
-      redirect_to @post, alert: 'No file attached to this post.'
+      send_data @post.file.download, filename: @post.file.filename, disposition: 'attachment'
     end
   end
 
@@ -31,39 +32,34 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
 
-    # Anexa o arquivo ao post se um arquivo foi enviado
-    @post.file.attach(params[:post][:file]) if params[:post][:file].present?
-
-    # Processa as tags fornecidas
-    process_tags(@post, params[:post][:new_tags]) if params[:post][:new_tags].present?
-
-    # Verifica se o arquivo foi anexado e é um arquivo de texto; caso contrário, salva sem processar o arquivo
-    if @post.file.attached? && file_is_text?(@post.file)
-      ProcessFileJob.perform_later(@post.file.blob.id)  # Enfileira o job para processar o arquivo
+    # Verifica se um arquivo foi enviado e, em caso afirmativo, se é um arquivo de texto
+    if params[:post][:file].present?
+      if file_is_text?(params[:post][:file])
+        @post.body = params[:post][:file].read  # Salva o conteúdo do arquivo no campo 'body' do post
+      else
+        flash[:alert] = 'Please select a text file (.txt).'
+        render :new
+        return  # Interrompe a execução se o arquivo não é de texto
+      end
     end
 
+    # Tentar salvar o post, independentemente de ter ou não um arquivo
     if @post.save
-      # Se o arquivo foi enviado e é válido, mostra a mensagem de processamento
-      if @post.file.attached? && file_is_text?(@post.file)
-        redirect_to posts_path, notice: 'Post creation initiated. File is being processed in the background.'
-      else
-        redirect_to posts_path, notice: 'Post was successfully created.'
-      end
+      process_tags(@post, params[:post][:new_tags]) if params[:post][:new_tags].present?
+      redirect_to @post, notice: 'Post was successfully created.'
     else
-      # Em caso de falha ao salvar, renderiza a view 'new' novamente
-      render :new, alert: 'Failed to save post.', status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
 
-
-
   def edit
+
   end
 
   def update
     if @post.update(post_params)
-      process_tags(@post, params[:post][:new_tags])
+      process_tags(@post, params[:post][:new_tags]) if params[:post][:new_tags].present?
       redirect_to @post, notice: 'Post was successfully updated.'
     else
       render :edit
@@ -82,9 +78,6 @@ class PostsController < ApplicationController
   private
 
   def process_tags(post, tag_string)
-    # Retorna cedo se tag_string for nil ou vazia, evitando erros quando chamando `split`
-    return if tag_string.blank?
-
     tag_names = tag_string.split(',').map(&:strip).uniq
     tag_names.each do |name|
       tag = Tag.find_or_create_by(name: name)
@@ -92,17 +85,15 @@ class PostsController < ApplicationController
     end
   end
 
-
   def file_is_text?(file)
-    file.content_type == 'text/plain'
+    file.present? && file.respond_to?(:read) && file.content_type == 'text/plain'
   end
-
 
   def set_post
     @post = Post.find(params[:id])
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :file, :new_tags, tag_ids: [])
+    params.require(:post).permit(:title, :body, :new_tags, tag_ids: [], file: [])
   end
 end
