@@ -52,6 +52,7 @@
          <p><%=t("posts.no_tags") %></p>
         <% end %>
 
+        <p><%= t("posts.author") %>: <%= post.user.email %></p>
         <p><%= t("posts.quantity_comments") %>: <%= post.comments.count %></p>
 
       </div>
